@@ -15,25 +15,11 @@ public class AutomationBase
     public static ExtentTest test;
     public static ExtentReports extent = new ExtentReports();
 
-    string varControl1;
-    string varControl2;
-    string varControl3;
-
-
     [OneTimeSetUp]
     public void ExtentStart()
     {
         string reportPath = @"C:\Users\cmm77\Repositorios C\Project\src\report\";
         ExtentLoggerReporter logger = new ExtentLoggerReporter(reportPath);
-        if(TestContext.CurrentContext.Test.Properties["Category"].Contains("UI"))
-        {
-            logger.Config.ReportName = "UI Report";
-        }
-        else
-        {
-            logger.Config.ReportName = "API Report";
-        }
-
         extent.AttachReporter(logger);
     }
 
