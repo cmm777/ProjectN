@@ -1,4 +1,4 @@
-using Project.src.framework;
+using Project.src.framework.automation;
 using NUnit.Framework;
 using System.Net;
 using System.Text.Json.Nodes;

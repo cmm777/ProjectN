@@ -1,5 +1,5 @@
 using OpenQA.Selenium;
-using Project.src.framework;
+using Project.src.framework.automation;
 
 namespace Project.src.pages;
 
