@@ -3,7 +3,7 @@ using Project.src.framework.automation;
 
 namespace Project.src.pages;
 
-public class Header : AutomationBaseUI
+public class Header : AutomationBase
 {
     private IWebElement entityDropdown;
     private IWebElement searchBox;

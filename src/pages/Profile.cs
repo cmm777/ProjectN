@@ -3,7 +3,7 @@ using Project.src.framework.automation;
 
 namespace Project.src.pages;
 
-public class Profile : AutomationBaseUI
+public class Profile : AutomationBase
 {
     private IWebElement pageTitle;
     private IWebElement bandStatus;

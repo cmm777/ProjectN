@@ -3,7 +3,7 @@ using Project.src.framework.automation;
 
 namespace Project.src.pages;
 
-public class Desambiguation : AutomationBaseUI
+public class Desambiguation : AutomationBase
 {
     private IWebElement pageTitle;
     

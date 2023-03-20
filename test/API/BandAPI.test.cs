@@ -1,14 +1,15 @@
 using Project.src.framework.automation;
 using NUnit.Framework;
 using System.Net;
-using System.Text.Json.Nodes;
 
-namespace Project.test.UI;
+namespace Project.test.API;
 
 [TestFixture]
-public class BandAPITest : AutomationBaseAPI
+public class BandAPITest : AutomationBase
 {
     [Test]
+    [Category("API")]
+    [Author("Cristian Maillard")]
     public async Task VerifyExistingBand()
     {
         using var httpClient = new HttpClient();
@@ -17,14 +18,18 @@ public class BandAPITest : AutomationBaseAPI
     }
 
     [Test]
+    [Category("API")]
+    [Author("Cristian Maillard")]
     public async Task VerifyUnexistingBand()
     {
         using var httpClient = new HttpClient();
         var response = await httpClient.GetAsync("https://www.metal-archives.com/bands/Morcillalica");
         Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
     }
-
+    
     [Test]
+    [Category("API")]
+    [Author("Cristian Maillard")]
     public async Task VerifyBandStatus()
     {
         using var httpClient = new HttpClient();

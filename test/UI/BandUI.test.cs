@@ -4,10 +4,12 @@ using NUnit.Framework;
 namespace Project.test.UI;
 
 [TestFixture]
-public class BandUITest : AutomationBaseUI
+public class BandUITest : AutomationBase
 {
     [Test]
-    public void VerifySearchPageTitle()
+    [Category("UI")]
+    [Author("Cristian Maillard")]
+    public void VerifySearchPageTitleUI()
     {
         // test variables
         string entityType = "band_name";
@@ -21,7 +23,9 @@ public class BandUITest : AutomationBaseUI
     }
 
     [Test]
-    public void VerifyBandProfileIsDisplayed()
+    [Category("UI")]
+    [Author("Cristian Maillard")]
+    public void VerifyBandProfileIsDisplayedUI()
     {
         // test variables
         string entityType = "band_name";
@@ -37,7 +41,9 @@ public class BandUITest : AutomationBaseUI
     }
 
     [Test]
-    public void VerifyBandStatus()
+    [Category("UI")]
+    [Author("Cristian Maillard")]
+    public void VerifyBandStatusUI()
     {
         // test variables
         string entityType = "band_name";

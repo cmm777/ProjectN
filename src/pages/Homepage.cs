@@ -3,7 +3,7 @@ using Project.src.framework.automation;
 
 namespace Project.src.pages;
 
-public class Homepage : AutomationBaseUI
+public class Homepage : AutomationBase
 {
     public Homepage(IWebDriver driver)
     {
