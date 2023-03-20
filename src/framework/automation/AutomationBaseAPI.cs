@@ -1,11 +1,8 @@
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using Project.src.pages;
 using NUnit.Framework;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 
-namespace Project.src.framework;
+namespace Project.src.framework.automation;
 
 public class AutomationBaseAPI
 {
