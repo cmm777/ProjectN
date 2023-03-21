@@ -1,5 +1,4 @@
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using Project.src.pages;
 using NUnit.Framework;
 using AventStack.ExtentReports;
@@ -11,6 +10,7 @@ namespace Project.src.framework.automation;
 public class AutomationBase
 {
     protected IWebDriver myDriver;
+    protected StartBrowser startBrowser;
     public Header header;
     public Homepage homepage;
     public static ExtentTest test;
@@ -32,9 +32,7 @@ public class AutomationBase
         if(testType)
         {
             test.Log(Status.Info, "UI test started");
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("start-maximized");
-            myDriver = new ChromeDriver(options);
+            myDriver = new StartBrowser().StartSelectedBrowser("Chrome");
             myDriver.Navigate().GoToUrl("https://www.metal-archives.com/");
             header = new Header(myDriver);
             homepage = new Homepage(myDriver);
