@@ -1,11 +1,12 @@
 using OpenQA.Selenium;
 using Project.src.framework.automation;
+using Project.src.framework.controls;
 
 namespace Project.src.pages;
 
 public class Desambiguation : AutomationBase
 {
-    private IWebElement pageTitle;
+    private Label pageTitle;
     
     public Desambiguation(IWebDriver myDriver)
     {
@@ -15,7 +16,7 @@ public class Desambiguation : AutomationBase
 
     private void Init(IWebDriver myDriver)
     {
-        pageTitle = myDriver.FindElement(By.XPath("//h1[@class='page_title']"));
+        pageTitle = new Label(myDriver.FindElement(By.XPath("//h1[@class='page_title']")));
     }
 
     public string GetPageTitle()

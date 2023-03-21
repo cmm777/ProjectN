@@ -39,7 +39,7 @@ public class BandAPITest : AutomationBase
     [Author("Cristian Maillard")]
     public async Task VerifyBandStatus()
     {
-        test.Log(Status.Info, "Test objective is to validate the band status is \"United States\"");
+        test.Log(Status.Info, "Test objective is to validate the band country is \"United States\"");
         using var httpClient = new HttpClient();
         test.Log(Status.Info, "Sending the request");
         string response = await httpClient.GetStringAsync("https://www.metal-archives.com/search/ajax-band-search/?field=name&query=Metallica&sEcho=1&iColumns=3&sColumns=&iDisplayStart=0&iDisplayLength=200&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2");

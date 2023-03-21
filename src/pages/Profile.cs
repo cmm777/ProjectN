@@ -1,11 +1,12 @@
 using OpenQA.Selenium;
 using Project.src.framework.automation;
+using Project.src.framework.controls;
 
 namespace Project.src.pages;
 
 public class Profile : AutomationBase
 {
-    private IWebElement pageTitle;
+    private Label pageTitle;
     private IWebElement bandStatus;
     
     public Profile(IWebDriver myDriver)
@@ -16,8 +17,8 @@ public class Profile : AutomationBase
 
     private void Init(IWebDriver myDriver)
     {
-        pageTitle = myDriver.FindElement(By.XPath("//h1[@class='band_name']/a"));
-        bandStatus = myDriver.FindElement(By.XPath("//dt[text()='Status:']/following-sibling::dd[1]"));
+        pageTitle = new Label(myDriver.FindElement(By.XPath("//h1[@class='band_name']/a")));
+        bandStatus = new Label(myDriver.FindElement(By.XPath("//dt[text()='Status:']/following-sibling::dd[1]")));
     }
 
     public string GetPageTitle()
