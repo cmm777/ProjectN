@@ -16,7 +16,7 @@ public class Desambiguation : AutomationBase
 
     private void Init(IWebDriver myDriver)
     {
-        pageTitle = new Label(myDriver.FindElement(By.XPath("//h1[@class='page_title']")));
+        pageTitle = new Label(myDriver, myDriver.FindElement(By.XPath("//h1[@class='page_title']")));
     }
 
     public string GetPageTitle()

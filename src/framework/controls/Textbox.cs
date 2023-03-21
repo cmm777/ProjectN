@@ -1,12 +1,15 @@
-using System.Collections.ObjectModel;
-using System.Drawing;
 using OpenQA.Selenium;
 
 namespace Project.src.framework.controls;
 
 public class Textbox : BaseElement
 {
-    public Textbox(IWebElement webElement) : base(webElement)
+    private IWebDriver _myDriver;
+    private IWebElement _element;
+
+    public Textbox(IWebDriver myDriver, IWebElement webElement) : base(webElement)
     {
+        _element = webElement;
+        _myDriver = myDriver;
     }
 }

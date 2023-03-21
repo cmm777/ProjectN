@@ -6,7 +6,12 @@ namespace Project.src.framework.controls;
 
 public class Button : BaseElement
 {
-    public Button(IWebElement webElement) : base(webElement)
+    private IWebDriver _myDriver;
+    private IWebElement _element;
+
+    public Button(IWebDriver myDriver, IWebElement webElement) : base(webElement)
     {
+        _element = webElement;
+        _myDriver = myDriver;
     }
 }

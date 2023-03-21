@@ -1,12 +1,22 @@
-using System.Collections.ObjectModel;
-using System.Drawing;
 using OpenQA.Selenium;
 
 namespace Project.src.framework.controls;
 
 public class Dropdown : BaseElement
 {
-    public Dropdown(IWebElement webElement) : base(webElement)
+    private IWebDriver _myDriver;
+    private IWebElement _element;
+
+    public Dropdown(IWebDriver myDriver, IWebElement webElement) : base(webElement)
     {
+        _element = webElement;
+        _myDriver = myDriver;
+    }
+
+    internal void SelectOption(string entity)
+    {
+        _element.Click();
+        var option = _myDriver.FindElement(By.XPath("//option[@value='"+entity+"']"));
+        option.Click();
     }
 }

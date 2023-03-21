@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using Project.src.framework.automation;
 using Project.src.framework.controls;
+using Project.src.pages.locators;
 
 namespace Project.src.pages;
 
@@ -18,16 +19,14 @@ public class Header : AutomationBase
 
     public void Init(IWebDriver myDriver)
     {
-        entityDropdown = new Dropdown(myDriver.FindElement(By.XPath("//select[@name='type']")));
-        searchBox = new Textbox(myDriver.FindElement(By.XPath("//input[@id='searchQueryBox']")));
-        submitButton = new Button(myDriver.FindElement(By.XPath("//button[@type='submit']")));
+        entityDropdown = new Dropdown(myDriver, myDriver.FindElement(By.XPath(LHeader.entityDropdown)));
+        searchBox = new Textbox(myDriver, myDriver.FindElement(By.XPath(LHeader.searchBox)));
+        submitButton = new Button(myDriver, myDriver.FindElement(By.XPath(LHeader.submitButton)));
     }
 
     public Desambiguation Search(string entity, string name)
     {
-        entityDropdown.Click();
-        var option = myDriver.FindElement(By.XPath("//option[@value='"+entity+"']"));
-        option.Click();
+        entityDropdown.SelectOption(entity);
         searchBox.SendKeys(name);
         submitButton.Click();
         return new Desambiguation(myDriver);
