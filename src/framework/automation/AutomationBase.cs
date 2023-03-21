@@ -32,7 +32,7 @@ public class AutomationBase
         if(testType)
         {
             test.Log(Status.Info, "UI test started");
-            myDriver = new StartBrowser().StartSelectedBrowser("Chrome");
+            myDriver = new StartBrowser().StartSelectedBrowser(Browsers.Chrome);
             myDriver.Navigate().GoToUrl("https://www.metal-archives.com/");
             header = new Header(myDriver);
             homepage = new Homepage(myDriver);
