@@ -4,6 +4,7 @@ using Project.src.pages;
 using NUnit.Framework;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports.MarkupUtils;
 
 namespace Project.src.framework.automation;
 
@@ -19,7 +20,7 @@ public class AutomationBase
     public void ExtentStart()
     {
         string reportPath = @"C:\Users\cmm77\Repositorios C\Project\src\report\";
-        ExtentLoggerReporter logger = new ExtentLoggerReporter(reportPath);
+        ExtentHtmlReporter logger = new ExtentHtmlReporter (reportPath);
         extent.AttachReporter(logger);
     }
 
@@ -27,14 +28,20 @@ public class AutomationBase
     public void Setup()
     {
         test = extent.CreateTest(NUnit.Framework.TestContext.CurrentContext.Test.Name);
-        if(TestContext.CurrentContext.Test.Properties["Category"].Contains("UI"))
+        var testType = TestContext.CurrentContext.Test.Properties["Category"].Contains("UI");
+        if(testType)
         {
+            test.Log(Status.Info, "UI test started");
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("start-maximized");
             myDriver = new ChromeDriver(options);
             myDriver.Navigate().GoToUrl("https://www.metal-archives.com/");
             header = new Header(myDriver);
             homepage = new Homepage(myDriver);
+        }
+        else
+        {
+            test.Log(Status.Info, "API test started");
         }
     }
 
@@ -45,23 +52,23 @@ public class AutomationBase
         switch (result)
         {
             case "Inconclusive":
-                test.Log(Status.Warning, "Inconclusive");
+                test.Log(Status.Warning, MarkupHelper.CreateLabel("* INCONCLUSIVE *", ExtentColor.Yellow));
                 break;
 
             case "Skipped":
-                test.Log(Status.Skip, "Skipped");
+                test.Log(Status.Skip, MarkupHelper.CreateLabel("* SKIPPED *", ExtentColor.Yellow));
                 break;
 
             case "Passed":
-                test.Log(Status.Pass, "Passed");
+                test.Log(Status.Pass, MarkupHelper.CreateLabel("* PASSED *", ExtentColor.Green));
                 break;
 
             case "Failed":
-                test.Log(Status.Fail, "Failed");
+                test.Log(Status.Fail, MarkupHelper.CreateLabel("* FAILED *", ExtentColor.Red));
                 break;
 
             default:
-                test.Log(Status.Info, "There was a problem while running the test case");
+                test.Log(Status.Info, MarkupHelper.CreateLabel("* There was a problem while running the test case *", ExtentColor.Red));
                 break;
         }
         if(TestContext.CurrentContext.Test.Properties["Category"].Contains("UI"))

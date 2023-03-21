@@ -9,7 +9,7 @@ public class BandUITest : AutomationBase
     [Test]
     [Category("UI")]
     [Author("Cristian Maillard")]
-    public void VerifySearchPageTitleUI()
+    public void VerifySearchPageTitle()
     {
         // test variables
         string entityType = "band_name";
@@ -25,7 +25,7 @@ public class BandUITest : AutomationBase
     [Test]
     [Category("UI")]
     [Author("Cristian Maillard")]
-    public void VerifyBandProfileIsDisplayedUI()
+    public void VerifyBandProfileIsDisplayed()
     {
         // test variables
         string entityType = "band_name";
@@ -43,7 +43,7 @@ public class BandUITest : AutomationBase
     [Test]
     [Category("UI")]
     [Author("Cristian Maillard")]
-    public void VerifyBandStatusUI()
+    public void VerifyBandStatus()
     {
         // test variables
         string entityType = "band_name";
