@@ -7,7 +7,7 @@ public class Header : AutomationBase
 {
     private IWebElement entityDropdown;
     private IWebElement searchBox;
-    private IWebElement submitButton;
+    public IWebElement submitButton;
 
     public Header(IWebDriver myDriver)
     {
