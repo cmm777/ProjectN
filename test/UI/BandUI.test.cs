@@ -1,5 +1,6 @@
 using Project.src.framework.automation;
 using NUnit.Framework;
+using AventStack.ExtentReports;
 
 namespace Project.test.UI;
 
@@ -17,8 +18,11 @@ public class BandUITest : AutomationBase
         string expectedPageTitle = "Search results for \"Metallica\"";
 
         // test steps
+        test.Log(Status.Info, "Step 1: Search for "+entityName);
         var desambiguation = header.Search(entityType, entityName);
+        test.Log(Status.Info, "Step 2: Get the page title");
         string dTitle = desambiguation.GetPageTitle();
+        test.Log(Status.Info, "Assert: Compare expected result with obtained one");
         Assert.That(dTitle, Is.EqualTo(expectedPageTitle), "Validate the page title is the expected one");
     }
 
@@ -34,9 +38,12 @@ public class BandUITest : AutomationBase
         string expectedPageTitle = "Metallica";
 
         // test steps
+        test.Log(Status.Info, "Step 1: Search for "+entityName);
         var desambiguation = header.Search(entityType, entityName);
         var profile = desambiguation.TransitionToProfile(title);
+        test.Log(Status.Info, "Step 2: Get the page title");
         string pTitle = profile.GetPageTitle();
+        test.Log(Status.Info, "Assert: Compare expected result with obtained one");
         Assert.That(pTitle, Is.EqualTo(expectedPageTitle), "Validate the page title is the expected one");
     }
 
@@ -52,9 +59,12 @@ public class BandUITest : AutomationBase
         string expectedEntityStatus = "Active";
 
         // test steps
+        test.Log(Status.Info, "Step 1: Search for "+entityName);
         var desambiguation = header.Search(entityType, entityName);
         var profile = desambiguation.TransitionToProfile(title);
+        test.Log(Status.Info, "Step 2: Get the band status");
         string pStatus = profile.GetBandStatus();
+        test.Log(Status.Info, "Assert: Compare expected result with obtained one");
         Assert.That(pStatus, Is.EqualTo(expectedEntityStatus), "Validate the band status is \"Active\"");
     }
 }
