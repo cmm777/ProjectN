@@ -9,7 +9,7 @@ public class StartBrowser
 {
     private IWebDriver driver;
 
-    public IWebDriver StartSelectedBrowser(Browsers browser)
+    public IWebDriver StartSelectedBrowser(Browsers browser, string environment)
     {
         switch (browser)
         {
@@ -21,7 +21,11 @@ public class StartBrowser
 
             case Browsers.Firefox : driver = StartFirefox();
             break;
+
+            default : driver = StartChrome();
+            break;
         }
+        driver.Navigate().GoToUrl(environment);
         return driver;
     }
 
