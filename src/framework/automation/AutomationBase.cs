@@ -11,8 +11,7 @@ public class AutomationBase
 {
     protected IWebDriver myDriver;
     protected StartBrowser startBrowser;
-    public Header header;
-    public Homepage homepage;
+    public Careers careers;
     public static ExtentTest test;
     public static ExtentReports extent = new ExtentReports();
 
@@ -33,13 +32,15 @@ public class AutomationBase
         {
             test.Log(Status.Info, "UI test started");
             myDriver = new StartBrowser().StartSelectedBrowser(Browsers.Chrome, Environments.prod);
-            header = new Header(myDriver);
-            homepage = new Homepage(myDriver);
+            careers = new Careers(myDriver);
         }
         else
         {
             test.Log(Status.Info, "API test started");
         }
+        
+        // Dealing with the manage cookies modal
+        myDriver.FindElement(By.XPath("//a[@id='hs-eu-confirmation-button']")).Click();
     }
 
     [TearDown]

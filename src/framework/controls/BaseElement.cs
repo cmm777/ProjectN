@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Drawing;
 using OpenQA.Selenium;
+using System.Threading;
 
 namespace Project.src.framework.controls;
 
@@ -80,5 +81,21 @@ public class BaseElement : IWebElement
     public void Submit()
     {
         _element.Submit();
+    }
+
+    //This method should be refactored to also prevent NoSuchElement exceptions
+    public void WaitUntilDisplayed()
+    {
+        var threshold = 5000;
+        var elapsed = 0;
+        while(_element.Displayed == false && elapsed < threshold)
+        {
+            Thread.Sleep(500);
+            elapsed = elapsed + 500;
+        }
+        if(_element.Displayed == false)
+        {
+            throw new ElementNotVisibleException("Element wasn't found after 5 seconds");
+        }
     }
 }
