@@ -43,3 +43,5 @@ The validations performed on the UI should be also done on the backend side to a
 Additional test cases can be added to validate the optional fields content do not cause issues when added to to the form/request
 
 It is important to validate the information provided by the applicant in the form is stored correctly in the database, specially if we consider the special characters and also, a field that should allow to easily differentiate the applicants by the position they applied to (Example: "3656312-staff-engineer" or "3648234-senior-quality-assurance-engineer" should be translated to a field in the database so people reviewing the applications have better control)
+
+Finally, from all of the possible tests cases I mentioned above, I would build 2 E2E automated tests that apply to 2 different positions, one by uploading the CV, the other applying with LinkedIn and validating the data entered in the fields (or obtained from LinkedIn) is correctly stored in the applicants database
