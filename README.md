@@ -7,6 +7,4 @@ Clone:
 Nuvolar repo
 
 Commands to execute:
-dotnet build
-dotnet test
-
+dotnet build, dotnet test
