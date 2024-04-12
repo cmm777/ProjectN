@@ -1,3 +1,4 @@
+using Microsoft.CodeAnalysis;
 using OpenQA.Selenium;
 
 namespace Project.src.framework.controls;
@@ -13,10 +14,11 @@ public class Dropdown : BaseElement
         _myDriver = myDriver;
     }
 
-    internal void SelectOption(string entity)
+    internal void SelectOption(string path, int index)
     {
+        index=index-1;
         _element.Click();
-        var option = _myDriver.FindElement(By.XPath("//option[@value='"+entity+"']"));
+        var option = _myDriver.FindElement(By.XPath(path+"["+(index+1)+"]"));
         option.Click();
     }
 }

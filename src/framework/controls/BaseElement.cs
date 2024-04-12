@@ -2,6 +2,8 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using OpenQA.Selenium;
 using System.Threading;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace Project.src.framework.controls;
 
@@ -83,19 +85,43 @@ public class BaseElement : IWebElement
         _element.Submit();
     }
 
-    //This method should be refactored to also prevent NoSuchElement exceptions
-    public void WaitUntilDisplayed()
+    public static IWebElement WaitForElementClickable(IWebDriver driver, By locator, TimeSpan timeout)
+    {
+        DateTime startTime = DateTime.Now;
+        IWebElement? element = null;
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+
+        while ((DateTime.Now - startTime) < timeout)
+        {
+            try
+            {
+                element = driver.FindElement(locator);
+                if (element != null && element.Enabled && element.Displayed)
+                {
+                    return element;
+                }
+            }
+            catch (NoSuchElementException) { }
+
+            Thread.Sleep(500);
+        }
+
+        throw new TimeoutException($"Timed out after {timeout.TotalSeconds} seconds waiting for element to be clickable.");
+    }
+
+    public void WaitUntilEnabled()
     {
         var threshold = 5000;
         var elapsed = 0;
-        while(_element.Displayed == false && elapsed < threshold)
+        while(_element.Enabled == false && elapsed < threshold)
         {
             Thread.Sleep(500);
             elapsed = elapsed + 500;
         }
-        if(_element.Displayed == false)
+        if(_element.Enabled == false)
         {
-            throw new ElementNotVisibleException("Element wasn't found after 5 seconds");
+            throw new ElementNotVisibleException("Element wasn't enabled after 5 seconds");
         }
     }
+
 }

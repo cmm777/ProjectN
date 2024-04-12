@@ -4,21 +4,23 @@ using NUnit.Framework;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.MarkupUtils;
+using RestSharp;
 
 namespace Project.src.framework.automation;
 
 public class AutomationBase
 {
     protected IWebDriver myDriver;
+    protected RestClient apiClient;
     protected StartBrowser startBrowser;
-    public Careers careers;
+    public Header header;
     public static ExtentTest test;
     public static ExtentReports extent = new ExtentReports();
 
     [OneTimeSetUp]
     public void ExtentStart()
     {
-        string reportPath = @"C:\Users\cmm77\Repositorios C\Project\src\report\";
+        string reportPath = @"C:\NuvolarAutomationReport\";
         ExtentHtmlReporter logger = new ExtentHtmlReporter (reportPath);
         extent.AttachReporter(logger);
     }
@@ -26,21 +28,21 @@ public class AutomationBase
     [SetUp]
     public void Setup()
     {
-        test = extent.CreateTest(NUnit.Framework.TestContext.CurrentContext.Test.Name);
+        test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
         var testType = TestContext.CurrentContext.Test.Properties["Category"].Contains("UI");
         if(testType)
         {
             test.Log(Status.Info, "UI test started");
-            myDriver = new StartBrowser().StartSelectedBrowser(Browsers.Chrome, Environments.prod);
-            careers = new Careers(myDriver);
+            myDriver = new StartBrowser().StartSelectedBrowser(Browsers.Chrome, Environments.prodUI);
+            header = new Header(myDriver);
+            // Dealing with the manage cookies modal
+            myDriver.FindElement(By.XPath("//input[@id='sp-cc-accept']")).Click();
         }
         else
         {
             test.Log(Status.Info, "API test started");
+            apiClient = new RestClient(Environments.prodAPI);
         }
-        
-        // Dealing with the manage cookies modal
-        myDriver.FindElement(By.XPath("//a[@id='hs-eu-confirmation-button']")).Click();
     }
 
     [TearDown]
@@ -62,6 +64,8 @@ public class AutomationBase
                 break;
 
             case "Failed":
+                test.Log(Status.Info, TestContext.CurrentContext.Result.Assertions.First().Message);
+                test.Log(Status.Info, TestContext.CurrentContext.Result.Assertions.First().StackTrace);
                 test.Log(Status.Fail, MarkupHelper.CreateLabel("* FAILED *", ExtentColor.Red));
                 break;
 
