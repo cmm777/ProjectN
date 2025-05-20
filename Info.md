@@ -4,7 +4,7 @@ Git
 .Net SDK (I'm using 7.0)
 
 Clone:
-Nuvolar repo
+ProjectN repo
 
 Commands to execute:
 dotnet build
